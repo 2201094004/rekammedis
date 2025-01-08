@@ -13,6 +13,9 @@ use App\Http\Controllers\HasilLabController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\TagihanController;
 use App\Http\Controllers\SistemPembayaranController;
+use App\Http\Controllers\NamaObatController;
+use App\Http\Controllers\KeluhanController;  
+use App\Http\Controllers\MedicalController;
 
 // Route untuk login
 Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
@@ -34,6 +37,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/data-pasien', [DataPasienController::class, 'index'])->name('dataPasien.index');
     Route::get('/data-pasien/{id}', [DataPasienController::class, 'show'])->name('dataPasien.show');
 
+    // Keluhan Pasien
+    Route::resource('keluhan-pasien', KeluhanController::class);  // Menambahkan route resource untuk KeluhanPasien
+
     // Dokter
     Route::resource('dokter', DokterController::class);
 
@@ -44,6 +50,9 @@ Route::middleware('auth')->group(function () {
     // Resep Obat
     Route::resource('resepObat', ResepObatController::class);
 
+    // Nama Obat (menambahkan route untuk NamaObatController)
+    Route::resource('namaObat', NamaObatController::class);
+
     // Hasil Lab
     Route::resource('hasilLab', HasilLabController::class);
 
@@ -53,10 +62,12 @@ Route::middleware('auth')->group(function () {
     // Sistem Pembayaran Routes
     Route::resource('sistemPembayaran', SistemPembayaranController::class);
 
+    //Laporan Medical
+    Route::get('/medical', [MedicalController::class, 'index'])->name('medical.index');
 });
 
 // Role Management
 Route::resource('roles', RoleController::class);
 
 // User
-Route::resource('user', UserController::class);
+Route::resource('users', UserController::class);

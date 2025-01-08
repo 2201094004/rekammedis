@@ -38,11 +38,11 @@
                     </td>
                     <td>
                         @can('edit users')
-                        <a href="{{ route('user.edit', $user->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning btn-sm">Edit</a>
                         @endcan
 
                         @can('delete users')
-                        <form action="{{ route('user.destroy', $user->id) }}" method="POST" class="d-inline">
+                        <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Hapus user ini?')">Delete</button>

@@ -26,8 +26,13 @@
             </select>
         </div>
         <div class="mb-3">
-            <label for="nama_obat" class="form-label">Nama Obat</label>
-            <input type="text" name="nama_obat" id="nama_obat" class="form-control" required>
+            <label for="nama_obat_id" class="form-label">Nama Obat</label>
+            <select name="nama_obat_id" id="nama_obat_id" class="form-control" required>
+                <option value="" disabled selected>Pilih Nama Obat</option>
+                @foreach ($dataNamaObat as $namaObat)
+                    <option value="{{ $namaObat->id }}">{{ $namaObat->nama_obat }}</option>
+                @endforeach
+            </select>
         </div>
         <div class="mb-3">
             <label for="dosis" class="form-label">Dosis</label>

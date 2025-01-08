@@ -60,9 +60,10 @@
         <div class="mb-3">
             <label for="sistem_pembayaran_id" class="form-label">Sistem Pembayaran</label>
             <select class="form-select" id="sistem_pembayaran_id" name="sistem_pembayaran_id" required>
+                <option value="">Pilih Sistem Pembayaran</option>
                 @foreach($sistemPembayaran as $sistem)
                     <option value="{{ $sistem->id }}" {{ old('sistem_pembayaran_id') == $sistem->id ? 'selected' : '' }}>
-                        {{ $sistem->nama }}
+                        {{ $sistem->nama_pembayaran }}
                     </option>
                 @endforeach
             </select>

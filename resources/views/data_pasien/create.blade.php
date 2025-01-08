@@ -34,6 +34,17 @@
                 <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
                 <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" required>
             </div>
+            {{-- <div class="mb-3">
+                <label for="keluhan_id" class="form-label">Keluhan</label>
+                <select class="form-select" id="keluhan_id" name="keluhan_id" required>
+                    <option value="">Pilih Keluhan</option>
+                    @foreach($keluhan as $keluhanItem)
+                        <option value="{{ $keluhanItem->id }}" {{ old('keluhan_id') == $keluhanItem->id ? 'selected' : '' }}>
+                            {{ $keluhanItem->deskripsi }}
+                        </option>
+                    @endforeach
+                </select>
+            </div> --}}
             <div class="mb-3">
                 <label for="keluarga_id" class="form-label">Keluarga</label>
                 <select class="form-select" id="keluarga_id" name="keluarga_id" required>

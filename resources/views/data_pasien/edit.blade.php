@@ -35,6 +35,10 @@
                 <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
                 <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" value="{{ $dataPasien->tanggal_lahir }}" required>
             </div>
+            {{-- <div class="mb-3">
+                <label for="keluhan" class="form-label">Keluhan</label>
+                <textarea class="form-control" id="keluhan" name="keluhan" rows="3" required>{{ $dataPasien->keluhan }}</textarea>
+            </div> --}}
             <div class="mb-3">
                 <label for="family_id" class="form-label">Keluarga</label>
                 <select class="form-select" id="family_id" name="family_id" required>

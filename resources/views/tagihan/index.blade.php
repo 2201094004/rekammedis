@@ -43,7 +43,7 @@
                         <td>{{ $item->rekamMedik->keluhan ?? '-' }}</td>
                         <td>{{ number_format($item->nominal, 2) }}</td>
                         <td>{{ ucfirst($item->status) }}</td>
-                        <td>{{ $item->sistemPembayaran->nama ?? 'Tidak ada' }}</td>
+                        <td>{{ $item->sistemPembayaran->nama_pembayaran ?? 'Tidak ada' }}</td>
                         <td>
                             <a href="{{ route('tagihan.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
                             <form action="{{ route('tagihan.destroy', $item->id) }}" method="POST" class="d-inline">

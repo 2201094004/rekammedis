@@ -4,6 +4,7 @@
 <div class="container">
     <h3 class="mb-4">Tabel Sistem Pembayaran</h3>
 
+    <!-- Success Message -->
     @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
@@ -11,13 +12,15 @@
         </div>
     @endif
 
-    <!-- Form Pencarian -->
+    <!-- Search Form -->
     <form action="{{ route('sistemPembayaran.index') }}" method="GET" class="mb-3">
         <input type="text" name="search" class="form-control" placeholder="Cari nama sistem pembayaran..." value="{{ request('search') }}">
     </form>
 
+    <!-- Add New Payment System Button -->
     <a href="{{ route('sistemPembayaran.create') }}" class="btn btn-primary mb-3">Tambah Sistem Pembayaran</a>
 
+    <!-- Table for Payment Systems -->
     <table class="table table-striped table-hover">
         <thead class="table-dark">
             <tr>
@@ -52,6 +55,9 @@
         </tbody>
     </table>
 
-    {{ $sistemPembayaran->links() }}
+    <!-- Pagination Links -->
+    <div class="d-flex justify-content-center">
+        {{ $sistemPembayaran->links() }}
+    </div>
 </div>
 @endsection

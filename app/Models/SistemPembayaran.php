@@ -14,6 +14,7 @@ class SistemPembayaran extends Model
 
     public function tagihan()
     {
-        return $this->hasMany(Tagihan::class);
+        return $this->hasMany(Tagihan::class, 'sistem_pembayaran_id');
     }
+    
 }

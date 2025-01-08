@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('resep_obat', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_rekam_medik');
-            $table->string('nama_obat');
+            $table->unsignedBigInteger('nama_obat_id'); 
             $table->string('dosis');
             $table->text('petunjuk');
             $table->unsignedBigInteger('dokter_id')->nullable();
@@ -22,6 +22,7 @@ return new class extends Migration
 
             $table->foreign('id_rekam_medik')->references('id')->on('rekam_medik')->onDelete('cascade');
             $table->foreign('dokter_id')->references('id')->on('dokter')->onDelete('set null');
+            $table->foreign('nama_obat_id')->references('id')->on('nama_obat')->onDelete('cascade');
         });
     }
 

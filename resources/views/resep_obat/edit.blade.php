@@ -10,19 +10,25 @@
             @method('PUT')
 
             <div class="mb-3">
-                <label for="id_rekam_medis" class="form-label">Rekam Medis</label>
-                <select name="id_rekam_medis" id="id_rekam_medis" class="form-control" required>
-                    @foreach($dataRekamMedis as $rekamMedis)
-                        <option value="{{ $rekamMedis->id }}" {{ $resepObat->id_rekam_medis == $rekamMedis->id ? 'selected' : '' }}>
-                            {{ $rekamMedis->pasien->nama }} - {{ $rekamMedis->diagnosis }}
+                <label for="id_rekam_medik" class="form-label">Rekam Medik</label>
+                <select name="id_rekam_medik" id="id_rekam_medik" class="form-control" required>
+                    @foreach($dataRekamMedis as $rekamMedik)
+                        <option value="{{ $rekamMedik->id }}" {{ $resepObat->id_rekam_medik == $rekamMedik->id ? 'selected' : '' }}>
+                            {{ $rekamMedik->pasien->nama }} - {{ $rekamMedik->diagnosa }}
                         </option>
                     @endforeach
                 </select>
             </div>
 
             <div class="mb-3">
-                <label for="nama_obat" class="form-label">Nama Obat</label>
-                <input type="text" name="nama_obat" id="nama_obat" class="form-control" value="{{ $resepObat->nama_obat }}" required>
+                <label for="nama_obat_id" class="form-label">Nama Obat</label>
+                <select name="nama_obat_id" id="nama_obat_id" class="form-control" required>
+                    @foreach($dataNamaObat as $namaObat)
+                        <option value="{{ $namaObat->id }}" {{ $resepObat->nama_obat_id == $namaObat->id ? 'selected' : '' }}>
+                            {{ $namaObat->nama_obat }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="mb-3">

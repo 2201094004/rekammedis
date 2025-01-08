@@ -20,9 +20,14 @@ return new class extends Migration
             $table->enum('jenis_kelamin', ['laki-laki', 'perempuan']);
             $table->date('tanggal_lahir');
             $table->unsignedBigInteger('keluarga_id');
+            // $table->unsignedBigInteger('keluhan_id')->nullable();  // Menambahkan kolom keluhan_id sebagai foreign key
             $table->timestamps();
 
+            // Menambahkan foreign key untuk relasi keluarga_id
             $table->foreign('keluarga_id')->references('id')->on('data_keluarga')->onDelete('cascade');
+            
+            // Menambahkan foreign key untuk relasi keluhan_id ke tabel keluhan
+           
         });
     }
 

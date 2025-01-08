@@ -13,20 +13,16 @@ class DataPasienController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-    {
-        // Mengambil input pencarian
-        $search = $request->input('search');
-        
-        // Mengambil data pasien dengan pencarian
-        $dataPasien = DataPasien::when($search, function ($query, $search) {
-            return $query->where('nik', 'like', '%' . $search . '%')
-                         ->orWhere('nama', 'like', '%' . $search . '%')
-                         ->orWhere('alamat', 'like', '%' . $search . '%');
-        })->get();
+{
+    $search = $request->input('search');
 
-        // Mengembalikan tampilan index dengan data pasien
-        return view('data_pasien.index', compact('dataPasien'));
-    }
+    $dataPasien = DataPasien::when($search, function ($query, $search) {
+        return $query->where('nama', 'like', "%{$search}%")
+                     ->orWhere('nik', 'like', "%{$search}%");
+    })->paginate(10); // Adjust the number 10 to your preferred pagination size.
+
+    return view('data_pasien.index', compact('dataPasien'));
+}
 
     /**
      * Show the form for creating a new resource.
@@ -53,6 +49,7 @@ class DataPasienController extends Controller
             'nomor_telepon' => 'required|string|max:15',
             'jenis_kelamin' => 'required|in:laki-laki,perempuan',
             'tanggal_lahir' => 'required|date',
+            // 'keluhan' => 'required|string',
             'keluarga_id' => 'required|exists:data_keluarga,id',
         ]);
 
@@ -110,6 +107,7 @@ class DataPasienController extends Controller
             'nomor_telepon' => 'required|string|max:15',
             'jenis_kelamin' => 'required|in:laki-laki,perempuan',
             'tanggal_lahir' => 'required|date',
+            // 'keluhan' => 'required|string',
             'keluarga_id'     => 'required|exists:data_keluarga,id',
         ]);
 

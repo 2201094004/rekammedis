@@ -3,26 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataPasien;
+use App\Models\Dokter;
 
 class Dashboard extends Controller
 {
     public function index()
     {
-        // Mengambil data jumlah pasien per bulan
-        $chartData = DataPasien::selectRaw('MONTH(created_at) as bulan, COUNT(*) as total')
-            ->groupBy('bulan')
-            ->orderBy('bulan')
+        // Hitung jumlah total data pasien dan dokter
+        $totalPasien = DataPasien::count();
+        $totalDokter = Dokter::count();
+
+        // Hitung jumlah pasien berdasarkan jenis kelamin (L/P)
+        $genderCounts = DataPasien::select('jenis_kelamin', \DB::raw('count(*) as count'))
+            ->groupBy('jenis_kelamin') // Tidak ada filter keluhan
             ->get();
 
-        // Mapping bulan menjadi nama bulan
-        $bulan = $chartData->pluck('bulan')->map(function ($b) {
-            return date("F", mktime(0, 0, 0, $b, 1)); // Mengubah angka bulan menjadi nama bulan
-        })->toArray();
+        // Persiapkan data untuk grafik
+        $genderLabels = $genderCounts->pluck('jenis_kelamin')->toArray(); // L/P
+        $genderData = $genderCounts->pluck('count')->toArray(); // Jumlah pasien
 
-        // Mengambil jumlah total pasien
-        $total = $chartData->pluck('total')->toArray();
+        // Jika tidak ada data untuk gender, pastikan data tetap terisi (untuk menghindari error pada Chart.js)
+        if (empty($genderLabels)) {
+            $genderLabels = ['Laki-laki', 'Perempuan']; // Default labels
+            $genderData = [0, 0]; // Default data
+        }
 
-        // Mengirim data ke view
-        return view('dashboard.index', compact('bulan', 'total'));
+        // Kirim data ke view dashboard
+        return view('dashboard.index', compact('totalPasien', 'totalDokter', 'genderLabels', 'genderData'));
     }
 }
